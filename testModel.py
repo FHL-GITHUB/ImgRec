@@ -24,11 +24,12 @@ def test():
     for i in range(N):
         cv2.rectangle(img1, (boxes[i][0], boxes[i][1]), (boxes[i][0] + boxes[i][2], boxes[i][1] + boxes[i][3]), (0, 255, 0),2)
 
-    classes = ['Bull', 'Up', 'Down', 'Right', 'Left', 'Stop', "6", '7', '8', '9', '0', 'V', 'W', 'X', 'Y', 'Z']
+    classes = ['0', '6', '7', '8', '9', "Bull", 'Down', 'Left', 'Right', 'Stop', 'Up', 'V', 'W', 'X', 'Y', 'Z']
     net = torch.load("./model_dic.pt")
     net.eval()
 
     VALIDATE_PATH = os.path.join(os.getcwd(), './model_test')
+
 
     transform = Compose([ToTensor(), Resize((224, 224)), Grayscale(3)])
 
@@ -47,6 +48,7 @@ def test():
 
     return str(classes[label[0]]), result_label
 
-def main():
+
+if __name__ == '__main__':
     target,label=test()
     print(target,label)
